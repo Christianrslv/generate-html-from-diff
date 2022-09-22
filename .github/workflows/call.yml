@@ -7,14 +7,14 @@ jobs:
   # job1:
   #   uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
   job1:
-    uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
+    uses: Christianrslv/generate-html-from-diff/.github/workflows/check.yml@master
     with:
       username: Christian
       token: teste
 
 
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - run: echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   needs: job1
+  #   steps:
+  #     - run: echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}

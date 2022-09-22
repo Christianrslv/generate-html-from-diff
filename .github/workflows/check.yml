@@ -19,4 +19,9 @@ jobs:
         run: echo "Job running ..."
 
       - name: Verify username
+        if: ${{ inputs.username == 'Christian' }}
         run: echo "${{ inputs.username }}"
+
+      - name: Throw error
+        if: ${{ inputs.username != 'Christian' }}
+        run: exit 1

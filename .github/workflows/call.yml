@@ -7,11 +7,17 @@ jobs:
   # job1:
   #   uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
   job1:
-    uses: Christianrslv/generate-html-from-diff/.github/workflows/check.yml@master
-    with:
-      username: Christian
-    secrets:
-      token: teste
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Name
+        uses: Christianrslv/generate-html-from-diff/.github/workflows/check.yml@master
+        with:
+          username: Christian
+        secrets:
+          token: teste
+
+      - name: Print after
+        run: echo "Finish"
 
 
   # job2:

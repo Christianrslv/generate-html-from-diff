@@ -10,6 +10,7 @@ jobs:
     uses: Christianrslv/generate-html-from-diff/.github/workflows/check.yml@master
     with:
       username: Christian
+    secrets:
       token: teste
 
 

@@ -4,8 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  # job1:
+  #   uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
   job1:
-    uses: Christianrslv/generate-html-from-diff/.github/workflows/v1.yml@master
+    uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
+    with:
+      username: Christian
+      token: teste
+
 
   job2:
     runs-on: ubuntu-latest

@@ -1,0 +1,22 @@
+name: Check 
+
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  check_name:
+    name: Check Name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start job
+        run: echo "Job running ..."
+
+      - name: Verify username
+        run: echo "${{ inputs.username }}"

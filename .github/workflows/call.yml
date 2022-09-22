@@ -7,6 +7,7 @@ jobs:
   # job1:
   #   uses: Christianrslv/generate-html-from-diff/.github/workflows/outputs.yml@master
   job1:
+    name: Job 1
     runs-on: ubuntu-latest
     steps:
       - name: Check Name

@@ -6,7 +6,7 @@ inputs:
     required: true
     default: 'diff'
 outputs:
-  time: # id of output
+  diff2html: # id of output
     description: 'diff2html'
 runs:
   using: 'node16'

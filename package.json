@@ -21,7 +21,8 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.3",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "diff2html": "^3.4.19"
   },
   "devDependencies": {}
 }

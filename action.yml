@@ -1,13 +1,13 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Generate Html from git diff'
+description: 'Generate Html from git diff'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  git-diff:  # id of input
+    description: 'Git diff'
     required: true
-    default: 'World'
+    default: 'diff'
 outputs:
   time: # id of output
-    description: 'The time we greeted you'
+    description: 'diff2html'
 runs:
   using: 'node16'
   main: 'index.js'

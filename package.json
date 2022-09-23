@@ -1,0 +1,24 @@
+{
+  "name": "generate-html-from-diff",
+  "version": "1.0.0",
+  "description": "Action to generate html output for a diff string input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christianrslv/generate-html-from-diff.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Christianrslv/generate-html-from-diff/issues"
+  },
+  "homepage": "https://github.com/Christianrslv/generate-html-from-diff#readme",
+  "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3"
+  }
+}

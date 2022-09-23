@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Action to generate html output for a diff string input",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

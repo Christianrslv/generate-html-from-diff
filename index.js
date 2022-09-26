@@ -2,7 +2,7 @@ import { getInput, setOutput, setFailed, exportVariable } from '@actions/core';
 import { context } from '@actions/github';
 import { createRequire } from 'node:module';
 
-const HBS_TEMPLATE = 'diff-message.handlebars';
+const HBS_TEMPLATE = './diff-message.handlebars';
 const require = createRequire(import.meta.url);
 const Diff2html = require('diff2html');
 const Handlebars = require('handlebars');

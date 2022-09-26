@@ -277,7 +277,7 @@ const header = `<!DOCTYPE html>
       width: 7.5em
     }
     .d2h-code-linenumber:after {
-      content: "\200b"
+      content: "\\200b"
     }
     .d2h-code-side-linenumber {
       background-color: #fff;
@@ -296,7 +296,7 @@ const header = `<!DOCTYPE html>
       width: 4em
     }
     .d2h-code-side-linenumber:after {
-      content: "\200b"
+      content: "\\200b"
     }
     .d2h-code-side-emptyplaceholder,
     .d2h-emptyplaceholder {

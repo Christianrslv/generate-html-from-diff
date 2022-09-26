@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
-
+export const htmlconcat = {
+   header: `<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diff file</title>
-  {{!--
-  <link rel="stylesheet" href="./diff-style.css"> --}}
-  <style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
     .hljs {
       display: block;
       overflow-x: auto;
@@ -273,7 +271,7 @@
       width: 7.5em
     }
     .d2h-code-linenumber:after {
-      content: "\200b"
+      content: "\\200b"
     }
     .d2h-code-side-linenumber {
       background-color: #fff;
@@ -292,7 +290,7 @@
       width: 4em
     }
     .d2h-code-side-linenumber:after {
-      content: "\200b"
+      content: "\\200b"
     }
     .d2h-code-side-emptyplaceholder,
     .d2h-emptyplaceholder {
@@ -411,11 +409,10 @@
       border: 1px solid #3572b0
     }
   </style>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+  
 </head>
-
-<body>
-  {{{ diff2html }}}
-</body>
-
-</html>
+<body>`,
+footer: `</body>
+</html>`
+}

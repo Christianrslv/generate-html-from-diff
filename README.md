@@ -1,24 +1,20 @@
 # Generate html from diff
 Action to generate html output for a diff string input
 
-# Hello world javascript action
-
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
-
 ## Inputs
 
-## `who-to-greet`
+## `git-diff`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The result of the git diff command. Default `"diff"`.
 
 ## Outputs
 
-## `time`
+## `diff2html`
 
-The time we greeted you.
+The html file genereted
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1.1
-with:
-  who-to-greet: 'Mona the Octocat'
+uses: Christianrslv/generate-html-from-diff@@v2.1  
+with:  
+git-diff: ${{ env.DIFF }}

@@ -15,6 +15,6 @@ The html file genereted
 
 ## Example usage
 
-uses: Christianrslv/generate-html-from-diff@@v2.1  
+uses: Christianrslv/generate-html-from-diff@v1.0.0  
 with:  
 git-diff: ${{ env.DIFF }}

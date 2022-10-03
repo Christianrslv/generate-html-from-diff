@@ -5,6 +5,8 @@ import { htmlconcat } from './htmlconcat.js';
  
 const require = createRequire(import.meta.url);
 const Diff2html = require('diff2html');
+const fs = require('fs');
+const yml = require('js-yaml');
 
 try {
   const diff = getInput('git-diff');
@@ -19,6 +21,15 @@ try {
   console.log(`The event payload: ${payload}`);
 } catch (error) {
   setFailed(error.message);
+}
+
+try {
+  let fileContents = fs.readFileSync('config.deploy.yml', 'utf8');
+  let data = yml.load(fileContents);
+
+  console.log(data.development.ignore_files);
+} catch (e) {
+  console.log(e);
 }
 
 function generateDiff2Html(gitDiff) {

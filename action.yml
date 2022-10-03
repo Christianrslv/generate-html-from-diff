@@ -1,13 +1,14 @@
 name: 'Generate Html from git diff'
 description: 'Generate Html from git diff'
 inputs:
-  git-diff:  # id of input
-    description: 'Git diff'
+  config-file:  # id of input
+    description: 'Configuration file name to ignore files in comparison'
     required: true
-    default: 'diff'
-outputs:
-  diff2html: # id of output
-    description: 'diff2html'
+    default: 'config.deploy.yml'
+  output-file-name:
+    description: 'Resulting html file from git diff'
+    required: true
+    default: 'git-diff.html'
 runs:
   using: 'node16'
   main: 'index.js'

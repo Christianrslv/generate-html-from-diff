@@ -1,4 +1,4 @@
-import { getInput, setOutput, setFailed, exportVariable } from '@actions/core';
+import { getInput, setFailed } from '@actions/core';
 import { context } from '@actions/github';
 import { createRequire } from 'node:module';
 import { htmlconcat } from './htmlconcat.js';
@@ -7,29 +7,45 @@ const require = createRequire(import.meta.url);
 const Diff2html = require('diff2html');
 const fs = require('fs');
 const yml = require('js-yaml');
+const { exec } = require("child_process");
 
 try {
-  const diff = getInput('git-diff');
-  const diff2html = generateDiff2Html(diff);
+  let configFile = getInput('config-file');
+  if(configFile == '') configFile = 'config.deploy.yml';
+  let outputFileName = getInput('output-file-name');
+  if(outputFileName == '') outputFileName = 'git-diff.html';
+  const fileContents = fs.readFileSync(configFile, 'utf8');
+  const data = yml.load(fileContents);
+  const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
+  const gitDiff = await getGitDiff(gitDiffCommand);
+  const diff2html = generateDiff2Html(gitDiff);
   const resul = `${htmlconcat.header}
                  ${diff2html}
                  ${htmlconcat.footer}`;
-  console.log(resul);
-  setOutput("diff2html", resul);
-  
+  fs.writeFileSync(outputFileName, resul,  function (err) {
+    if (err) return console.log(err);
+    console.log('writed');
+  });
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
-} catch (error) {
-  setFailed(error.message);
+  } catch (error) {
+    setFailed(error.message);
 }
 
-try {
-  let fileContents = fs.readFileSync('config.deploy.yml', 'utf8');
-  let data = yml.load(fileContents);
-
-  console.log(data.development.ignore_files);
-} catch (e) {
-  console.log(e);
+function getGitDiff(gitDiffCommand) {
+  return new Promise(function (resolve, reject) {
+    exec(gitDiffCommand, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      resolve(stdout);
+    });
+  }) 
 }
 
 function generateDiff2Html(gitDiff) {
@@ -38,4 +54,12 @@ function generateDiff2Html(gitDiff) {
     drawFileList: true,
     outputFormat: 'side-by-side'
   });
+}
+
+function createGitDiffCommand(ignore_files) {
+  let gitDiffCommand = `git diff -- .`;
+  ignore_files.forEach(element => {
+    gitDiffCommand += ` :(exclude)${element}`;
+  });
+  return gitDiffCommand;
 }

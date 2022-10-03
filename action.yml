@@ -9,6 +9,9 @@ inputs:
     description: 'Resulting html file from git diff'
     required: true
     default: 'git-diff.html'
+outputs:
+  there-are-changes: # id of output
+    description: 'If there are changes, it returns true'
 runs:
   using: 'node16'
   main: 'index.js'

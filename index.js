@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { getInput, setFailed, setOutput } from '@actions/core';
 import { context } from '@actions/github';
 import { createRequire } from 'node:module';
 import { htmlconcat } from './htmlconcat.js';
@@ -10,6 +10,7 @@ const yml = require('js-yaml');
 const { exec } = require("child_process");
 
 try {
+  let thereAreChanges = false;
   let configFile = getInput('config-file');
   if(configFile == '') configFile = 'config.deploy.yml';
   let outputFileName = getInput('output-file-name');
@@ -18,6 +19,7 @@ try {
   const data = yml.load(fileContents);
   const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
   const gitDiff = await getGitDiff(gitDiffCommand);
+  if(gitDiff != '') thereAreChanges = true;
   const diff2html = generateDiff2Html(gitDiff);
   const resul = `${htmlconcat.header}
                  ${diff2html}
@@ -26,6 +28,7 @@ try {
     if (err) return console.log(err);
     console.log('writed');
   });
+  setOutput('there-are-changes', thereAreChanges);
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
   } catch (error) {

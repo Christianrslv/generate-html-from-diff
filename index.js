@@ -62,7 +62,7 @@ function generateDiff2Html(gitDiff) {
 function createGitDiffCommand(ignore_files) {
   let gitDiffCommand = `git diff -- .`;
   ignore_files.forEach(element => {
-    gitDiffCommand += ` :(exclude)${element}`;
+    gitDiffCommand += ` ':(exclude)${element}'`;
   });
   return gitDiffCommand;
 }

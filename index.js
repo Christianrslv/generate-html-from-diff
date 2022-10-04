@@ -18,7 +18,8 @@ try {
   const fileContents = fs.readFileSync(configFile, 'utf8');
   const data = yml.load(fileContents);
   const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
-  const gitDiff = await getGitDiff(gitDiffCommand);
+  const ls = await executeShCommand('ls');
+  const gitDiff = await executeShCommand(gitDiffCommand);
   if(gitDiff != '') thereAreChanges = true;
   const diff2html = generateDiff2Html(gitDiff);
   const resul = `${htmlconcat.header}
@@ -28,16 +29,16 @@ try {
     if (err) return console.log(err);
     console.log('writed');
   });
-  setOutput('there-are-changes', thereAreChanges);
+  setOutput('there-are-changes', ls);
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
   } catch (error) {
     setFailed(error.message);
 }
 
-function getGitDiff(gitDiffCommand) {
+function executeShCommand(command) {
   return new Promise(function (resolve, reject) {
-    exec(gitDiffCommand, (error, stdout, stderr) => {
+    exec(command, (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -62,7 +63,7 @@ function generateDiff2Html(gitDiff) {
 function createGitDiffCommand(ignore_files) {
   let gitDiffCommand = `git diff -- .`;
   ignore_files.forEach(element => {
-    gitDiffCommand += ` :(exclude)${element}`;
+    gitDiffCommand += ` ':(exclude)${element}'`;
   });
   return gitDiffCommand;
 }

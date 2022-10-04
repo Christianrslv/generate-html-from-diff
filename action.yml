@@ -1,7 +1,7 @@
 name: 'Generate Html from git diff'
 description: 'Generate Html from git diff'
 inputs:
-  config-file:  # id of input
+  ignore-files:  # id of input
     description: 'Configuration file name to ignore files in comparison'
     required: true
     default: 'config.deploy.yml'

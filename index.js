@@ -11,25 +11,26 @@ const { exec } = require("child_process");
 
 try {
   let thereAreChanges = false;
-  let configFile = getInput('config-file');
+  let ignoreFiles = getInput('ignore-files');
   if(configFile == '') configFile = 'config.deploy.yml';
   let outputFileName = getInput('output-file-name');
   if(outputFileName == '') outputFileName = 'git-diff.html';
-  const fileContents = fs.readFileSync(configFile, 'utf8');
-  const data = yml.load(fileContents);
-  const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
+  // const fileContents = fs.readFileSync(configFile, 'utf8');
+  // const data = yml.load(fileContents);
+  console.log(ignoreFiles.deployment);
+  // const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
   const ls = await executeShCommand('ls');
-  const gitDiff = await executeShCommand(gitDiffCommand);
-  if(gitDiff != '') thereAreChanges = true;
-  const diff2html = generateDiff2Html(gitDiff);
-  const resul = `${htmlconcat.header}
-                 ${diff2html}
-                 ${htmlconcat.footer}`;
-  fs.writeFileSync(outputFileName, resul,  function (err) {
-    if (err) return console.log(err);
-    console.log('writed');
-  });
-  setOutput('there-are-changes', ls);
+  // const gitDiff = await executeShCommand(gitDiffCommand);
+  // if(gitDiff != '') thereAreChanges = true;
+  // const diff2html = generateDiff2Html(gitDiff);
+  // const resul = `${htmlconcat.header}
+  //                ${diff2html}
+  //                ${htmlconcat.footer}`;
+  // fs.writeFileSync(outputFileName, resul,  function (err) {
+  //   if (err) return console.log(err);
+  //   console.log('writed');
+  // });
+  setOutput('there-are-changes', ignoreFiles.deployment);
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
   } catch (error) {

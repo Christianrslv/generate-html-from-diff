@@ -6,33 +6,27 @@ import { htmlconcat } from './htmlconcat.js';
 const require = createRequire(import.meta.url);
 const Diff2html = require('diff2html');
 const fs = require('fs');
-const yml = require('js-yaml');
 const { exec } = require("child_process");
 
 try {
-  // let thereAreChanges = false;
+  let thereAreChanges = false;
   let ignoreFiles = getInput('ignore-files');
-  // if(ignoreFiles == '') ignoreFiles = 'config.deploy.yml';
-  // let outputFileName = getInput('output-file-name');
-  // if(outputFileName == '') outputFileName = 'git-diff.html';
-  // const fileContents = fs.readFileSync(configFile, 'utf8');
-  // const data = yml.load(fileContents);
+  let outputFileName = getInput('output-file-name');
   const obj = JSON.parse(ignoreFiles);
-  console.log(ignoreFiles);
+  console.log("Files to ignore")
   console.log(obj.development.ignore_files);
-  // const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
-  // const ls = await executeShCommand('ls');
-  // const gitDiff = await executeShCommand(gitDiffCommand);
-  // if(gitDiff != '') thereAreChanges = true;
-  // const diff2html = generateDiff2Html(gitDiff);
-  // const resul = `${htmlconcat.header}
-  //                ${diff2html}
-  //                ${htmlconcat.footer}`;
-  // fs.writeFileSync(outputFileName, resul,  function (err) {
-  //   if (err) return console.log(err);
-  //   console.log('writed');
-  // });
-  // setOutput('there-are-changes', ls);
+  const gitDiffCommand = createGitDiffCommand(obj.development.ignore_files);
+  const gitDiff = await executeShCommand(gitDiffCommand);
+  if(gitDiff != '') thereAreChanges = true;
+  const diff2html = generateDiff2Html(gitDiff);
+  const resul = `${htmlconcat.header}
+                 ${diff2html}
+                 ${htmlconcat.footer}`;
+  fs.writeFileSync(outputFileName, resul,  function (err) {
+    if (err) return console.log(err);
+    console.log('writed');
+  });
+  setOutput('there-are-changes', thereAreChanges);
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
   } catch (error) {

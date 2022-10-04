@@ -17,7 +17,8 @@ try {
   if(outputFileName == '') outputFileName = 'git-diff.html';
   // const fileContents = fs.readFileSync(configFile, 'utf8');
   // const data = yml.load(fileContents);
-  console.log(ignoreFiles.deployment);
+  const obj = JSON.parse(ignoreFiles);
+  console.log(obj.deployment);
   // const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
   const ls = await executeShCommand('ls');
   // const gitDiff = await executeShCommand(gitDiffCommand);
@@ -30,7 +31,7 @@ try {
   //   if (err) return console.log(err);
   //   console.log('writed');
   // });
-  setOutput('there-are-changes', ignoreFiles.deployment);
+  setOutput('there-are-changes', obj.deployment);
   const payload = JSON.stringify(context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
   } catch (error) {

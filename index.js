@@ -19,7 +19,7 @@ try {
   // const data = yml.load(fileContents);
   const obj = JSON.parse(ignoreFiles);
   console.log(ignoreFiles);
-  console.log(obj.development);
+  console.log(obj.development.ignore_files);
   // const gitDiffCommand = createGitDiffCommand(data.development.ignore_files);
   // const ls = await executeShCommand('ls');
   // const gitDiff = await executeShCommand(gitDiffCommand);

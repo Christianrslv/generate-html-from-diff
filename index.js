@@ -12,7 +12,7 @@ const { exec } = require("child_process");
 try {
   let thereAreChanges = false;
   let ignoreFiles = getInput('ignore-files');
-  if(configFile == '') configFile = 'config.deploy.yml';
+  if(ignoreFiles == '') ignoreFiles = 'config.deploy.yml';
   let outputFileName = getInput('output-file-name');
   if(outputFileName == '') outputFileName = 'git-diff.html';
   // const fileContents = fs.readFileSync(configFile, 'utf8');
